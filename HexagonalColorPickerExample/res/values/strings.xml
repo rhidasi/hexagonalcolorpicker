@@ -10,6 +10,9 @@
     <string name="swatch_size">SwatchSize</string>
     <string name="swatch_padding">SwatchPadding</string>
 
+    <string name="dummy_category">Dummy category</string>
+    <string name="dummy_checkbox">Dummy checkbox</string>
+    <string name="dummy_checkbox_summary">Dummy checkbox summary</string>
     <string name="colors">Colors</string>
     <string name="color1">Color 1</string>
     <string name="color2">Color 2</string>

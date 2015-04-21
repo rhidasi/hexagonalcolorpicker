@@ -6,6 +6,15 @@
 	android:title="@string/settings" >
 
     <PreferenceCategory
+		android:title="@string/dummy_category">
+
+        <CheckBoxPreference
+            android:title="@string/dummy_checkbox"
+			android:summary="@string/dummy_checkbox_summary" />
+
+    </PreferenceCategory>
+   
+    <PreferenceCategory
 		android:title="@string/colors">
 
 	    <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
