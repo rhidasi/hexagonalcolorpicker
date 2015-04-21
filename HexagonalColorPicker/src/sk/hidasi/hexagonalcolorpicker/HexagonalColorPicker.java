@@ -108,6 +108,11 @@ public class HexagonalColorPicker extends View {
 		mListener = listener;
 		init();
 	}
+
+	public void setListener( final OnColorSelectedListener listener ) {
+
+		mListener = listener;
+	}
 		
 	private void init() {
 
