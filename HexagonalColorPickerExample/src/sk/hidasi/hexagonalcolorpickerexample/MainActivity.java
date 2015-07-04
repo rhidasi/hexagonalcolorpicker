@@ -32,6 +32,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements OnColorSelectedListener {
 
 	private static final int PALETTE_RADIUS = 3;
+	private static final int SEEK_MINIMUM = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 		SeekBar seekPaletteRadius = (SeekBar) findViewById(R.id.seekPaletteRadius);
 		EditText editPaletteRadius = (EditText) findViewById(R.id.editPaletteRadius);
 
-		bindControls(seekPaletteRadius, editPaletteRadius, PALETTE_RADIUS);
+		bindControls(seekPaletteRadius, editPaletteRadius, PALETTE_RADIUS-SEEK_MINIMUM);
 		
 		HexagonalColorPicker colorPicker = (HexagonalColorPicker) findViewById(R.id.hexagonalColorPicker);
 		colorPicker.setAttrs(PALETTE_RADIUS, Color.WHITE, this);
@@ -61,7 +62,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 			
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				edit.setText( Integer.toString(progress) );
+				edit.setText( Integer.toString(progress+SEEK_MINIMUM) );
 			}
 		});
 		
@@ -92,7 +93,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 
 		SeekBar seekPaletteRadius = (SeekBar) findViewById(R.id.seekPaletteRadius);
 
-		final int paletteRadius = seekPaletteRadius.getProgress();
+		final int paletteRadius = SEEK_MINIMUM+seekPaletteRadius.getProgress();
 		
 		HexagonalColorPicker colorPicker = (HexagonalColorPicker) findViewById(R.id.hexagonalColorPicker);
 		colorPicker.setAttrs(paletteRadius, Color.WHITE, this);

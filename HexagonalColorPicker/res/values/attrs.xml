@@ -3,6 +3,8 @@
 
     <declare-styleable name="HexagonalColorPicker">
         <attr name="paletteRadius" format="integer" />
+        <attr name="shadowDistance" format="dimension" />
+        <attr name="shadowColor" format="color" />
     </declare-styleable>
 
 </resources>

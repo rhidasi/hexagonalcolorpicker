@@ -30,7 +30,11 @@ import android.widget.LinearLayout;
 
 public class HexagonalColorPickerPreference extends Preference implements OnColorSelectedListener {
 
+	private static final int DEFAULT_PALETTE_RADIUS = 3;
+
 	private int mPaletteRadius;
+	private int mShadowDistance;
+	private int mShadowColor;
 	private int mValue;
 
 	public HexagonalColorPickerPreference(Context context) {
@@ -53,7 +57,9 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 		final TypedArray a = getContext().getTheme().obtainStyledAttributes(
 				attrs, R.styleable.HexagonalColorPicker, defStyle, defStyle);
 
-		mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, 2);
+		mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
+		mShadowDistance = a.getDimensionPixelSize(R.styleable.HexagonalColorPicker_shadowDistance, 0);
+		mShadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.DKGRAY);
 		a.recycle();
 	}
 
@@ -76,6 +82,7 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 	protected void onClick() {
 		super.onClick();
 		final HexagonalColorPickerDialog dialog = new HexagonalColorPickerDialog(getContext(), R.string.color_picker_default_title, mPaletteRadius, mValue, this);
+		dialog.setShadowParams(mShadowDistance, mShadowColor);
 		dialog.show();
 	}
 

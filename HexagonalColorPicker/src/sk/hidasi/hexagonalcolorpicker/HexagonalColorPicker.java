@@ -67,6 +67,8 @@ public class HexagonalColorPicker extends View {
 	private Paint mPaintFill;
 	private Paint mPaintStroke;
 	private int mPaletteRadius;
+	private int mShadowDistance;
+	private int mShadowColor;
 	private int mSelectedColor;
 	private long mAnimStartMilis;
 	private final Interpolator mInterpolator = new AccelerateDecelerateInterpolator();
@@ -94,6 +96,8 @@ public class HexagonalColorPicker extends View {
 			attrs, R.styleable.HexagonalColorPicker, defStyle, defStyle);
 	
 		mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
+		mShadowDistance = a.getDimensionPixelSize(R.styleable.HexagonalColorPicker_shadowDistance, 0);
+		mShadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.DKGRAY);
 		a.recycle();
 		
 		mSelectedColor = Color.TRANSPARENT;
@@ -107,6 +111,11 @@ public class HexagonalColorPicker extends View {
 		mSelectedColor = selectedColor;
 		mListener = listener;
 		init();
+	}
+	
+	public void setShadowParams(final int shadowDistance, final int shadowColor) {
+		mShadowDistance = shadowDistance;
+		mShadowColor = shadowColor;
 	}
 
 	public void setListener( final OnColorSelectedListener listener ) {
@@ -187,6 +196,11 @@ public class HexagonalColorPicker extends View {
 
 			final float x = mBounds.left + item.mCoordX * mBounds.width();
 			final float y = mBounds.top + item.mCoordY * mBounds.height();
+
+			if (mShadowDistance > 0) {
+				mPaintFill.setColor(mShadowColor);
+				canvas.drawCircle(x+mShadowDistance/2, y+mShadowDistance, r*1.05f, mPaintFill);
+			}
 
 			mPaintStroke.setColor(item.mColorStroke);
 			canvas.drawCircle(x, y, r, mPaintStroke);

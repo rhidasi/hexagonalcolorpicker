@@ -25,6 +25,8 @@
         android:layout_height="280dp"
         android:layout_gravity="center_horizontal"
         hidasi:paletteRadius="3"
+        hidasi:shadowDistance="2dp"
+        hidasi:shadowColor="@color/shadow"
         android:padding="4dp" />
 
     <TextView
@@ -44,7 +46,7 @@
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:max="5" />
+	        android:max="4" />
 
 	    <EditText
 	        android:id="@+id/editPaletteRadius"
