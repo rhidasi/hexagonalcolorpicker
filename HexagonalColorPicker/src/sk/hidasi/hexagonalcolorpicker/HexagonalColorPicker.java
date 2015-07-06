@@ -23,7 +23,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,7 +71,6 @@ public class HexagonalColorPicker extends View {
 	private int mSelectedColor;
 	private long mAnimStartMilis;
 	private final Interpolator mInterpolator = new AccelerateDecelerateInterpolator();
-	private final Handler mHandler = new Handler();
 	private OnColorSelectedListener mListener;
 
 	public HexagonalColorPicker(Context context) {
@@ -214,17 +212,11 @@ public class HexagonalColorPicker extends View {
 			}
 		}
 
+
 		if ( time <= ANIM_TIME_VIEW ) {
-			mHandler.postDelayed(mUpdate, 20);
+			postInvalidateDelayed(20);
 		}
 	}
-
-	private final Runnable mUpdate = new Runnable() {
-		@Override
-		public void run() {
-			invalidate();
-		}
-	};
 
 	public int getSelectedColor() {
 		return mSelectedColor;
