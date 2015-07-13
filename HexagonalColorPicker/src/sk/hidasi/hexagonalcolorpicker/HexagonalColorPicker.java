@@ -20,9 +20,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,6 +32,7 @@ import android.view.animation.Interpolator;
 public class HexagonalColorPicker extends View {
 
 	private static final float VIEW_ASPECT_RATIO = (float) Math.sqrt(4.0/3.0);
+	private static final int FRAMES_PER_SECOND = 50;
 
 	private static final int ANIM_TIME_VIEW  = 400;
 	private static final int ANIM_TIME_SWATCH = 200;
@@ -44,28 +45,35 @@ public class HexagonalColorPicker extends View {
 		public void onColorSelected(final int color);
 	}
 
-	class ColorSwatch {
+	class ColorSwatch extends GradientDrawable {
 		final public float mCoordX;
 		final public float mCoordY;
 		public int mColor;
-		public int mColorStroke;
 		public int mAnimStart;
 		public int mAnimEnd;
 
-		public ColorSwatch( final float coordX, final float coordY, final int animStart) {
-			mCoordX = coordX;
-			mCoordY = coordY;
+		public ColorSwatch( final int xCoord, final int yCoord, final int strokeWidth, final int animStart) {
+			mCoordX = getItemCoordX(xCoord);
+			mCoordY = getItemCoordY(yCoord);
 			mAnimStart = animStart;
 			mAnimEnd = animStart + ANIM_TIME_SWATCH;
+			setShape(GradientDrawable.OVAL);
+			final float x = (float)xCoord / (float)(mPaletteRadius*2);
+			final float y = (float)yCoord / (float)(mPaletteRadius*2);
+			final float[] hsv = { 360.0f * (float) (0.5 + 0.5 * Math.atan2(y, x) / Math.PI), (float) Math.sqrt(x*x + y*y), 1.0f };
+			mColor = isInEditMode() ? Color.CYAN : Color.HSVToColor(hsv);
+			setColor( mColor );
+			// stroke color is the same but darker 
+			hsv[2] = 0.5f;
+			setStroke(strokeWidth, isInEditMode() ? Color.BLUE : Color.HSVToColor(hsv));
 		}
 	}
 
 	private ColorSwatch[] mSwatches;
 	private Drawable mChecker;
 	private RectF mBounds;
-	private Paint mPaintFill;
-	private Paint mPaintStroke;
 	private int mPaletteRadius;
+	private GradientDrawable mShadowDrawable;
 	private int mShadowDistance;
 	private int mShadowColor;
 	private int mSelectedColor;
@@ -100,7 +108,6 @@ public class HexagonalColorPicker extends View {
 		
 		mSelectedColor = Color.TRANSPARENT;
 		mListener = null;
-		init();		
 	}
 
 	public void setAttrs(final int paletteRadius, final int selectedColor, final OnColorSelectedListener listener ) {
@@ -120,33 +127,36 @@ public class HexagonalColorPicker extends View {
 
 		mListener = listener;
 	}
-		
+
+	@Override
+	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+		super.onLayout(changed, left, top, right, bottom);
+		if (changed) {
+			init();
+		}
+	}
+	
 	private void init() {
 
 		mSwatches = new ColorSwatch[swatchCount(mPaletteRadius)];
 
+		final int strokeWidth = (int)(0.05f * getItemRadius());
 		int indx = 0;
 		for ( int y = -mPaletteRadius*2; y <= mPaletteRadius*2; y += 2 ) {
 			final int rowSize = mPaletteRadius*2 - Math.abs(y/2);
 			for ( int x = -rowSize; x <= rowSize; x += 2) {
 				final int animTimeStart = (ANIM_TIME_VIEW - ANIM_TIME_SWATCH) * indx / mSwatches.length;
-				final ColorSwatch item = new ColorSwatch( getItemCoordX(x), getItemCoordY(y), animTimeStart);
-				initItemColors(item, x, y);
-				mSwatches[indx++] = item;
+				mSwatches[indx++] = new ColorSwatch(x, y, strokeWidth, animTimeStart);
 			}
 		}
 		
 		if ( indx != mSwatches.length ) {
 			throw new IllegalStateException();
 		}
-
-		mPaintFill = new Paint();
-		mPaintFill.setStyle( Paint.Style.FILL );
-		mPaintFill.setAntiAlias(true);
-
-		mPaintStroke = new Paint();
-		mPaintStroke.setStyle( Paint.Style.STROKE );
-		mPaintStroke.setAntiAlias(true);
+		
+		mShadowDrawable = new GradientDrawable();
+		mShadowDrawable.setShape(GradientDrawable.OVAL);
+		mShadowDrawable.setColor(mShadowColor);
 
 		mAnimStartMilis = 0;
 
@@ -158,6 +168,22 @@ public class HexagonalColorPicker extends View {
 	private static int swatchCount(final int radius) {
 		return 3*radius*(radius + 1) + 1;
 	}
+	
+	private int getSwatchRadius(final ColorSwatch swatch, final int time, final int fullRadius) {
+
+		if ( isInEditMode() ) {
+			return fullRadius; 
+		}
+		
+		if ( time < swatch.mAnimStart ) {
+			return 0;
+		} else if ( time < swatch.mAnimEnd ) {
+			final float delta = (float)(time - swatch.mAnimStart) / ANIM_TIME_SWATCH;
+			return (int)(fullRadius * mInterpolator.getInterpolation(delta));
+		} else {
+			return fullRadius;
+		}
+	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -167,54 +193,34 @@ public class HexagonalColorPicker extends View {
 			return;
 		
 		if ( mAnimStartMilis == 0 ) {
-			mAnimStartMilis = System.currentTimeMillis();
+			mAnimStartMilis = System.currentTimeMillis() + 1000 / FRAMES_PER_SECOND;
 		}
 		
 		final int time = (int)(System.currentTimeMillis() - mAnimStartMilis);
-
-		final float fullSize = getItemRadius() * 0.9f;
-		mPaintStroke.setStrokeWidth(0.1f * fullSize);
-		final float aspect = 1.0f / ANIM_TIME_SWATCH;
+		final int fullRadius = (int)(getItemRadius() * 0.9f);
 
 		for ( final ColorSwatch item : mSwatches ) {
 
-			float r;
-			if ( time < item.mAnimStart ) {
-				r = 0.0f;
-			} else if ( time < item.mAnimEnd ) {
-				final float delta = (time - item.mAnimStart) * aspect;
-				r = fullSize * mInterpolator.getInterpolation(delta);
-			} else {
-				r = fullSize;
+			final int r = getSwatchRadius(item, time, fullRadius);
+			final int x = (int) (mBounds.left + item.mCoordX * mBounds.width());
+			final int y = (int) (mBounds.top + item.mCoordY * mBounds.height());
+
+			if ( mShadowDistance > 0 ) {
+				mShadowDrawable.setBounds(x-r+mShadowDistance/2, y-r+mShadowDistance, x+r+mShadowDistance/2, y+r+mShadowDistance);
+				mShadowDrawable.draw(canvas);
 			}
 
-			if ( isInEditMode() ) {
-				r = fullSize;
-			}			
-
-			final float x = mBounds.left + item.mCoordX * mBounds.width();
-			final float y = mBounds.top + item.mCoordY * mBounds.height();
-
-			if (mShadowDistance > 0) {
-				mPaintFill.setColor(mShadowColor);
-				canvas.drawCircle(x+mShadowDistance/2, y+mShadowDistance, r*1.05f, mPaintFill);
-			}
-
-			mPaintStroke.setColor(item.mColorStroke);
-			canvas.drawCircle(x, y, r, mPaintStroke);
-
-			mPaintFill.setColor(item.mColor);
-			canvas.drawCircle(x, y, r, mPaintFill);
+			item.setBounds(x-r, y-r, x+r, y+r);
+			item.draw(canvas);
 
 			if ( item.mColor == mSelectedColor && time >= item.mAnimEnd ) {
-				mChecker.setBounds((int)(x-r), (int)(y-r), (int)(x+r), (int)(y+r));
+				mChecker.setBounds(x-r, y-r, x+r, y+r);
 				mChecker.draw(canvas);
 			}
 		}
 
-
 		if ( time <= ANIM_TIME_VIEW ) {
-			postInvalidateDelayed(20);
+			postInvalidateDelayed(1000 / FRAMES_PER_SECOND);
 		}
 	}
 
@@ -235,22 +241,6 @@ public class HexagonalColorPicker extends View {
 
 	private float getItemCoordY(final int localY) {
 		return 0.5f + 0.5f * localY / (mPaletteRadius * 2 + 1);
-	}
-
-	private void initItemColors(ColorSwatch item, final int localX, final int localY) {
-
-		if ( isInEditMode() ) {
-			item.mColor = Color.CYAN;
-			item.mColorStroke = Color.BLUE;
-		} else {
-			final float x = (float)localX / (float)(mPaletteRadius*2);
-			final float y = (float)localY / (float)(mPaletteRadius*2);
-			final float[] hsv = { 360.0f * (float) (0.5 + 0.5 * Math.atan2(y, x) / Math.PI), (float) Math.sqrt(x*x + y*y), 1.0f };
-
-			item.mColor = Color.HSVToColor(hsv);
-			hsv[2] = 0.5f;
-			item.mColorStroke = Color.HSVToColor(hsv);
-		}
 	}
 
 	private ColorSwatch getTouchItem(final float touchX, final float touchY) {
@@ -314,6 +304,7 @@ public class HexagonalColorPicker extends View {
 			mBounds.top += halfDif;
 			mBounds.bottom -= halfDif;
 		}
+		init();
 	}
 	
 	@Override
