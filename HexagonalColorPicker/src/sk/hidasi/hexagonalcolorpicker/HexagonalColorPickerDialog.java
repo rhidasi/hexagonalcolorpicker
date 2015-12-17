@@ -30,7 +30,6 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 	private static final String KEY_SHADOW_COLOR = "shadow_color";
 	private static final String KEY_TITLE_ID = "title_id";
 
-	private HexagonalColorPicker mPalette;
 	private final OnColorSelectedListener mListener;
 
 	private int mTitleResId;
@@ -69,9 +68,9 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 
 		setContentView(R.layout.color_picker_dialog);
 		setTitle(mTitleResId);
-		mPalette = (HexagonalColorPicker) findViewById(R.id.color_picker);
-		mPalette.setAttrs(mPaletteRadius, mSelectedColor, this);
-		mPalette.setShadowParams(mShadowDistance, mShadowColor);
+		HexagonalColorPicker palette = (HexagonalColorPicker) findViewById(R.id.color_picker);
+		palette.setAttrs(mPaletteRadius, mSelectedColor, this);
+		palette.setShadowParams(mShadowDistance, mShadowColor);
 	}
 
 	@Override

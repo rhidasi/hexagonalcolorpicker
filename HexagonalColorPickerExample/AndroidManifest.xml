@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <manifest android:versionCode="1" android:versionName="1.0"
     package="sk.hidasi.hexagonalcolorpickerexample"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -24,7 +24,7 @@
         <activity
             android:name=".Preferences"
             android:label="@string/settings"
-            android:exported="true">
+            android:exported="false">
         </activity>
 
     </application>

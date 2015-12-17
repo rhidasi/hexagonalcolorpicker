@@ -50,7 +50,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 	
 	private void bindControls(final SeekBar seek, final EditText edit, final int initValue) {
 		
-		seek.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+		seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 			
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				edit.setText( Integer.toString(progress+SEEK_MINIMUM) );
+				edit.setText(Integer.toString(progress + SEEK_MINIMUM));
 			}
 		});
 		

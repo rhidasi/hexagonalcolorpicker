@@ -7,8 +7,6 @@
 
     <string name="update">Update</string>
     <string name="palette_radius">PaletteRadius</string>
-    <string name="swatch_size">SwatchSize</string>
-    <string name="swatch_padding">SwatchPadding</string>
 
     <string name="dummy_category">Dummy category</string>
     <string name="dummy_checkbox">Dummy checkbox</string>

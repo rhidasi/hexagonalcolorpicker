@@ -42,17 +42,17 @@ public class HexagonalColorPicker extends View {
 		/**
 		 * Called when a specific color swatch has been selected
 		 */
-		public void onColorSelected(final int color);
+		void onColorSelected(final int color);
 	}
 
 	class ColorSwatch extends GradientDrawable {
 		final public float mCoordX;
 		final public float mCoordY;
-		public int mColor;
-		public int mAnimStart;
-		public int mAnimEnd;
+		final public int mColor;
+		final public int mAnimStart;
+		final public int mAnimEnd;
 
-		public ColorSwatch( final int xCoord, final int yCoord, final int strokeWidth, final int animStart) {
+		public ColorSwatch(final int xCoord, final int yCoord, final int strokeWidth, final int animStart) {
 			mCoordX = getItemCoordX(xCoord);
 			mCoordY = getItemCoordY(yCoord);
 			mAnimStart = animStart;
@@ -62,7 +62,7 @@ public class HexagonalColorPicker extends View {
 			final float y = (float)yCoord / (float)(mPaletteRadius*2);
 			final float[] hsv = { 360.0f * (float) (0.5 + 0.5 * Math.atan2(y, x) / Math.PI), (float) Math.sqrt(x*x + y*y), 1.0f };
 			mColor = isInEditMode() ? Color.CYAN : Color.HSVToColor(hsv);
-			setColor( mColor );
+			setColor(mColor);
 			// stroke color is the same but darker 
 			hsv[2] = 0.5f;
 			setStroke(strokeWidth, isInEditMode() ? Color.BLUE : Color.HSVToColor(hsv));
@@ -123,8 +123,7 @@ public class HexagonalColorPicker extends View {
 		mShadowColor = shadowColor;
 	}
 
-	public void setListener( final OnColorSelectedListener listener ) {
-
+	public void setListener(final OnColorSelectedListener listener) {
 		mListener = listener;
 	}
 
@@ -142,15 +141,15 @@ public class HexagonalColorPicker extends View {
 
 		final int strokeWidth = (int)(0.05f * getItemRadius());
 		int indx = 0;
-		for ( int y = -mPaletteRadius*2; y <= mPaletteRadius*2; y += 2 ) {
+		for (int y = -mPaletteRadius*2; y <= mPaletteRadius*2; y += 2) {
 			final int rowSize = mPaletteRadius*2 - Math.abs(y/2);
-			for ( int x = -rowSize; x <= rowSize; x += 2) {
+			for (int x = -rowSize; x <= rowSize; x += 2) {
 				final int animTimeStart = (ANIM_TIME_VIEW - ANIM_TIME_SWATCH) * indx / mSwatches.length;
 				mSwatches[indx++] = new ColorSwatch(x, y, strokeWidth, animTimeStart);
 			}
 		}
 		
-		if ( indx != mSwatches.length ) {
+		if (indx != mSwatches.length) {
 			throw new IllegalStateException();
 		}
 		
@@ -160,7 +159,7 @@ public class HexagonalColorPicker extends View {
 
 		mAnimStartMilis = 0;
 
-		if ( !isInEditMode() ) {
+		if (!isInEditMode()) {
 			mChecker = getResources().getDrawable(R.drawable.ic_colorpicker_swatch_selected);
 		}
 	}
@@ -171,13 +170,13 @@ public class HexagonalColorPicker extends View {
 	
 	private int getSwatchRadius(final ColorSwatch swatch, final int time, final int fullRadius) {
 
-		if ( isInEditMode() ) {
+		if (isInEditMode()) {
 			return fullRadius; 
 		}
 		
-		if ( time < swatch.mAnimStart ) {
+		if (time < swatch.mAnimStart) {
 			return 0;
-		} else if ( time < swatch.mAnimEnd ) {
+		} else if (time < swatch.mAnimEnd) {
 			final float delta = (float)(time - swatch.mAnimStart) / ANIM_TIME_SWATCH;
 			return (int)(fullRadius * mInterpolator.getInterpolation(delta));
 		} else {
@@ -189,23 +188,23 @@ public class HexagonalColorPicker extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
-		if ( mBounds == null )
+		if (mBounds == null)
 			return;
 		
-		if ( mAnimStartMilis == 0 ) {
+		if (mAnimStartMilis == 0) {
 			mAnimStartMilis = System.currentTimeMillis() + 1000 / FRAMES_PER_SECOND;
 		}
 		
 		final int time = (int)(System.currentTimeMillis() - mAnimStartMilis);
 		final int fullRadius = (int)(getItemRadius() * 0.9f);
 
-		for ( final ColorSwatch item : mSwatches ) {
+		for (final ColorSwatch item : mSwatches) {
 
 			final int r = getSwatchRadius(item, time, fullRadius);
 			final int x = (int) (mBounds.left + item.mCoordX * mBounds.width());
 			final int y = (int) (mBounds.top + item.mCoordY * mBounds.height());
 
-			if ( mShadowDistance > 0 ) {
+			if (mShadowDistance > 0) {
 				mShadowDrawable.setBounds(x-r+mShadowDistance/2, y-r+mShadowDistance, x+r+mShadowDistance/2, y+r+mShadowDistance);
 				mShadowDrawable.draw(canvas);
 			}
@@ -213,13 +212,13 @@ public class HexagonalColorPicker extends View {
 			item.setBounds(x-r, y-r, x+r, y+r);
 			item.draw(canvas);
 
-			if ( item.mColor == mSelectedColor && time >= item.mAnimEnd ) {
+			if (item.mColor == mSelectedColor && time >= item.mAnimEnd) {
 				mChecker.setBounds(x-r, y-r, x+r, y+r);
 				mChecker.draw(canvas);
 			}
 		}
 
-		if ( time <= ANIM_TIME_VIEW ) {
+		if (time <= ANIM_TIME_VIEW) {
 			postInvalidateDelayed(1000 / FRAMES_PER_SECOND);
 		}
 	}
@@ -246,10 +245,10 @@ public class HexagonalColorPicker extends View {
 	private ColorSwatch getTouchItem(final float touchX, final float touchY) {
 		final float r = getItemRadius();
 
-		for ( final ColorSwatch item : mSwatches ) {
+		for (final ColorSwatch item : mSwatches) {
 			final float x = mBounds.left + item.mCoordX * mBounds.width();
 			final float y = mBounds.top + item.mCoordY * mBounds.height();
-			if ( x-r < touchX && touchX < x+r && y-r < touchY && touchY < y+r ) {
+			if (x-r < touchX && touchX < x+r && y-r < touchY && touchY < y+r) {
 				return item;
 			}
 		}
@@ -271,8 +270,8 @@ public class HexagonalColorPicker extends View {
 				break;
 
 			case MotionEvent.ACTION_UP:
-				if ( mListener != null && item != null ) {
-					if ( mSelectedColor == item.mColor ) {
+				if (mListener != null && item != null) {
+					if (mSelectedColor == item.mColor) {
 						mListener.onColorSelected(mSelectedColor);
 					}
 				}
@@ -295,11 +294,11 @@ public class HexagonalColorPicker extends View {
 		final float width = mBounds.width();
 		final float height = mBounds.height();
 
-		if ( width > height * VIEW_ASPECT_RATIO ) {
+		if (width > height * VIEW_ASPECT_RATIO) {
 			final float halfDif = (width - height * VIEW_ASPECT_RATIO) * 0.5f;
 			mBounds.left += halfDif;
 			mBounds.right -= halfDif;
-		} else if ( height > width / VIEW_ASPECT_RATIO ) {
+		} else if (height > width / VIEW_ASPECT_RATIO) {
 			final float halfDif = (height - width / VIEW_ASPECT_RATIO) * 0.5f;
 			mBounds.top += halfDif;
 			mBounds.bottom -= halfDif;
@@ -315,10 +314,10 @@ public class HexagonalColorPicker extends View {
 		int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 		int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-		if ( widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.UNSPECIFIED ) {
+		if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.UNSPECIFIED) {
 			heightSize = (int)(widthSize / VIEW_ASPECT_RATIO);
 		}
-		if ( widthMode == MeasureSpec.UNSPECIFIED && heightMode == MeasureSpec.EXACTLY ) {
+		if (widthMode == MeasureSpec.UNSPECIFIED && heightMode == MeasureSpec.EXACTLY) {
 			widthSize = (int)(heightSize * VIEW_ASPECT_RATIO);
 		}
 

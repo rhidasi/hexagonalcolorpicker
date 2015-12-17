@@ -125,7 +125,7 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 		final GradientDrawable colorChoiceDrawable = new GradientDrawable();
 		colorChoiceDrawable.setShape(GradientDrawable.OVAL);
 
-		// set stroke color a little bit darker than fill
+		// set stroke color slightly darker than fill
 		final int darkenedColor = Color.rgb(
 				Color.red(color) * 192 / 256,
 				Color.green(color) * 192 / 256,
@@ -136,7 +136,7 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 		iView.setImageDrawable(colorChoiceDrawable);
 	}
 
-	private int dipToPixels( final float dip ) {
+	private int dipToPixels(final float dip) {
 		return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getContext().getResources().getDisplayMetrics());
 	}
 	

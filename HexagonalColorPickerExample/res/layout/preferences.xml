@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:hidasi="http://schemas.android.com/apk/res-auto"
 	android:key="wallpaper_preferences"
-	android:title="@string/settings" >
+	android:title="@string/settings"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
 
     <PreferenceCategory
 		android:title="@string/dummy_category">
