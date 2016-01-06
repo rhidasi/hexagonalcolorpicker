@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="red">#ff0000</color>
-    <color name="blue">#0000ff</color>
+	<color name="red">#FF0000</color>
+    <color name="blue">#0F00FF</color>
     <color name="shadow">#A0A0A0</color>
 </resources>

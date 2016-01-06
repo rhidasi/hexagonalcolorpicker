@@ -2,7 +2,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:hidasi="http://schemas.android.com/apk/res-auto"
-	android:key="wallpaper_preferences"
 	android:title="@string/settings"
 	android:layout_height="match_parent"
 	android:layout_width="match_parent">
@@ -11,6 +10,7 @@
 		android:title="@string/dummy_category">
 
         <CheckBoxPreference
+			android:key="dummy_checkbox"
             android:title="@string/dummy_checkbox"
 			android:summary="@string/dummy_checkbox_summary" />
 
@@ -20,6 +20,7 @@
 		android:title="@string/colors">
 
 	    <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
+			android:key="color_1"
 	        android:title="@string/color1"
 			android:summary="@string/tap_to_change_color"
 	        android:defaultValue="@color/blue"
@@ -28,6 +29,7 @@
 	        hidasi:paletteRadius="2" />
 
 	    <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
+			android:key="color_2"
 	        android:title="@string/color2"
 			android:summary="@string/tap_to_change_color"
 	        android:defaultValue="@color/red"
