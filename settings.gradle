@@ -1,0 +1,2 @@
+include ':hexagonalColorPicker'
+include ':hexagonalColorPickerExample'
