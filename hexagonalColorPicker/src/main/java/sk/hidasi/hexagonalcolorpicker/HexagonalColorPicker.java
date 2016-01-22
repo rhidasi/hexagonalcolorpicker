@@ -158,12 +158,12 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
 			return;
 		}
 
-		final int swatchRadius = (int) (getItemRadius() * 0.9f);
+		final int swatchRadius = (int) getItemRadius();
 		final int padding = (int) (0.075f * getItemRadius());
 		final int strokeWidth = (int) (0.05f * getItemRadius());
 
 		for (HexagonalColorSwatch item : mSwatches) {
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(swatchRadius * 2 + padding, swatchRadius * 2 + padding);
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(swatchRadius * 2 - strokeWidth, swatchRadius * 2 - strokeWidth);
 			params.leftMargin = (int) getItemPositionX(item) - swatchRadius;
 			params.topMargin = (int) getItemPositionY(item) - swatchRadius;
 			params.gravity = Gravity.TOP | Gravity.LEFT;
@@ -252,7 +252,7 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
     @Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
-		final float strokePadding = Math.min(w, h) * 0.02f;
+		final float strokePadding = Math.min(w, h) * 0.025f;
 		final float width = w - getPaddingLeft() - getPaddingRight() - 2.0f * strokePadding;
 		final float height = h - getPaddingTop() - getPaddingBottom() - 2.0f * strokePadding;
 		mRenderOffset = new PointF(strokePadding, strokePadding);
