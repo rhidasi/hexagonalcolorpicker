@@ -25,7 +25,6 @@ You can optionally define color change listener (see `HexagonalColorPicker#setLi
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal"
 		hidasi:paletteRadius="3"
-		hidasi:shadowDistance="2dp"
 		hidasi:shadowColor="@color/shadow"
 		android:padding="4dp" />
 ```
@@ -63,7 +62,6 @@ Color Picker can be used also on Preferece Screen. Usage is the same as for any 
 		android:title="@string/color"
 		android:summary="@string/tap_to_change_color"
 		android:defaultValue="@color/red"
-		hidasi:shadowDistance="2dp"
 		hidasi:shadowColor="@color/shadow"
 		hidasi:paletteRadius="3" />
 ```
