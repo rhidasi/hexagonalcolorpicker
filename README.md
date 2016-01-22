@@ -76,7 +76,9 @@ HexagonalColorPickerExample
 ---------------------------
 
 Provided example application demonstrates the usage of HexagonalColorPicker.
+
 You can install the application from Google Play for easy access:
+
 [![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_small.png)](https://play.google.com/store/apps/details?id=sk.hidasi.hexagonalcolorpickerexample)
 
 License
