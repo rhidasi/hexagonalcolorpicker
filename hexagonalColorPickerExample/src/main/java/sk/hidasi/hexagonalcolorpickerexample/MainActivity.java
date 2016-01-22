@@ -97,7 +97,9 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 		
 		HexagonalColorPicker colorPicker = (HexagonalColorPicker) findViewById(R.id.hexagonalColorPicker);
 		colorPicker.setAttrs(paletteRadius, Color.WHITE, this);
-		colorPicker.invalidate();
+
+		TextView textView = (TextView) findViewById(R.id.hello);
+		textView.setTextColor(Color.BLACK);
 	}
 
 	@Override

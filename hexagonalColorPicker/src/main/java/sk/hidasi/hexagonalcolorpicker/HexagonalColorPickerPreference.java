@@ -33,7 +33,6 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 	private static final int DEFAULT_PALETTE_RADIUS = 3;
 
 	private int mPaletteRadius;
-	private int mShadowDistance;
 	private int mShadowColor;
 	private int mValue;
 
@@ -58,15 +57,14 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 				attrs, R.styleable.HexagonalColorPicker, defStyle, defStyle);
 
 		mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
-		mShadowDistance = a.getDimensionPixelSize(R.styleable.HexagonalColorPicker_shadowDistance, 0);
-		mShadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.DKGRAY);
+		mShadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.GRAY);
 		a.recycle();
 	}
 
 	@Override
 	protected void onBindView(View view) {
 		super.onBindView(view);
-		setPreviewBitmap(view, mValue);
+		setPreviewImage(view, mValue);
 	}
 
 	@Override
@@ -82,7 +80,7 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 	protected void onClick() {
 		super.onClick();
 		final HexagonalColorPickerDialog dialog = new HexagonalColorPickerDialog(getContext(), R.string.color_picker_default_title, mPaletteRadius, mValue, this);
-		dialog.setShadowParams(mShadowDistance, mShadowColor);
+		dialog.setShadowColor(mShadowColor);
 		dialog.show();
 	}
 
@@ -100,7 +98,7 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 		return mValue;
 	}
 
-	private void setPreviewBitmap(final View view, final int color) {
+	private void setPreviewImage(final View view, final int color) {
 
 		if (view == null) return;
 		final LinearLayout widgetFrameView = ((LinearLayout)view.findViewById(android.R.id.widget_frame));
@@ -124,20 +122,12 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 		iView.setLayoutParams(new LinearLayout.LayoutParams(size, size));
 		final GradientDrawable colorChoiceDrawable = new GradientDrawable();
 		colorChoiceDrawable.setShape(GradientDrawable.OVAL);
-
-		// set stroke color slightly darker than fill
-		final int darkenedColor = Color.rgb(
-				Color.red(color) * 192 / 256,
-				Color.green(color) * 192 / 256,
-				Color.blue(color) * 192 / 256);
-
 		colorChoiceDrawable.setColor(color);
-		colorChoiceDrawable.setStroke(dipToPixels(1), darkenedColor);
+		colorChoiceDrawable.setStroke(dipToPixels(1), HexagonalColorPicker.getStrokeColor(color));
 		iView.setImageDrawable(colorChoiceDrawable);
 	}
 
 	private int dipToPixels(final float dip) {
 		return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getContext().getResources().getDisplayMetrics());
 	}
-	
 }

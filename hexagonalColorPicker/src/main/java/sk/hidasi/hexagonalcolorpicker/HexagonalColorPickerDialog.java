@@ -26,7 +26,6 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 
 	private static final String KEY_SELECTED_COLOR = "selected_color";
 	private static final String KEY_PALETTE_RADIUS = "palette_radius";
-	private static final String KEY_SHADOW_DISTANCE = "shadow_distance";
 	private static final String KEY_SHADOW_COLOR = "shadow_color";
 	private static final String KEY_TITLE_ID = "title_id";
 
@@ -35,7 +34,6 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 	private int mTitleResId;
 	private int mPaletteRadius;
 	private int mSelectedColor;
-	private int mShadowDistance;
 	private int mShadowColor;
 
 	public HexagonalColorPickerDialog(Context context, final int titleResId, final int radius,
@@ -45,12 +43,10 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 		mPaletteRadius = radius;
 		mSelectedColor = selectedColor;
 		mListener = listener;
-		mShadowDistance = 0;
-		mShadowColor = Color.DKGRAY;
+		mShadowColor = Color.GRAY;
 	}
 	
-	public void setShadowParams(final int shadowDistance, final int shadowColor) {
-		mShadowDistance = shadowDistance;
+	public void setShadowColor(final int shadowColor) {
 		mShadowColor = shadowColor;
 	}
 
@@ -62,7 +58,6 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 			mTitleResId = savedInstanceState.getInt(KEY_TITLE_ID);
 			mPaletteRadius = savedInstanceState.getInt(KEY_PALETTE_RADIUS);
 			mSelectedColor = savedInstanceState.getInt(KEY_SELECTED_COLOR);
-			mShadowDistance = savedInstanceState.getInt(KEY_SHADOW_DISTANCE);
 			mShadowColor = savedInstanceState.getInt(KEY_SHADOW_COLOR);
 		}
 
@@ -70,7 +65,7 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 		setTitle(mTitleResId);
 		HexagonalColorPicker palette = (HexagonalColorPicker) findViewById(R.id.color_picker);
 		palette.setAttrs(mPaletteRadius, mSelectedColor, this);
-		palette.setShadowParams(mShadowDistance, mShadowColor);
+		palette.setShadowColor(mShadowColor);
 	}
 
 	@Override
@@ -95,7 +90,6 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 		outState.putInt(KEY_TITLE_ID, mTitleResId);
 		outState.putInt(KEY_PALETTE_RADIUS, mPaletteRadius);
 		outState.putInt(KEY_SELECTED_COLOR, mSelectedColor);
-		outState.putInt(KEY_SHADOW_DISTANCE, mShadowDistance);
 		outState.putInt(KEY_SHADOW_COLOR, mShadowColor);
 		return outState;
 	}

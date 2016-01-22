@@ -25,9 +25,8 @@
         android:layout_height="280dp"
         android:layout_gravity="center_horizontal"
         hidasi:paletteRadius="3"
-        hidasi:shadowDistance="2dp"
         hidasi:shadowColor="@color/shadow"
-        android:padding="4dp" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"

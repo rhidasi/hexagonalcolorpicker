@@ -24,7 +24,6 @@
 	        android:title="@string/color1"
 			android:summary="@string/tap_to_change_color"
 	        android:defaultValue="@color/blue"
-    	    hidasi:shadowDistance="2dp"
 	        hidasi:shadowColor="@color/shadow"
 	        hidasi:paletteRadius="2" />
 
@@ -33,7 +32,6 @@
 	        android:title="@string/color2"
 			android:summary="@string/tap_to_change_color"
 	        android:defaultValue="@color/red"
-    	    hidasi:shadowDistance="1dp"
 	        hidasi:shadowColor="@color/shadow"
 	        hidasi:paletteRadius="3" />
 
