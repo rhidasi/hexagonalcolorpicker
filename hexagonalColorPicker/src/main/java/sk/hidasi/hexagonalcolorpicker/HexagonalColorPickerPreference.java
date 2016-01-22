@@ -37,21 +37,15 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 	private int mValue;
 
 	public HexagonalColorPickerPreference(Context context) {
-		super(context);
-		initAttrs(null, 0);
+		this(context, null, 0);
 	}
 
 	public HexagonalColorPickerPreference(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initAttrs(attrs, 0);
+		this(context, attrs, 0);
 	}
 
 	public HexagonalColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		initAttrs(attrs, defStyle);
-	}
-
-	private void initAttrs(AttributeSet attrs, int defStyle) {
 
 		final TypedArray a = getContext().getTheme().obtainStyledAttributes(
 				attrs, R.styleable.HexagonalColorPicker, defStyle, defStyle);

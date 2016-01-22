@@ -52,7 +52,7 @@ The usage of Dialog class is really straightforward.
 Preference
 ----------
 
-Color Picker can be used also on Preferece Screen. Usage is the same as for any other preferences. You can provide default, initial color value by setting `android:defaultValue` attribute. Value selected in the dialog will be stored under the key provided with `android:key` attribute.
+Color Picker can be used also on Preference Screen. Usage is the same as for any other preferences. You can provide default, initial color value by setting `android:defaultValue` attribute. Value selected in the dialog will be stored under the key provided with `android:key` attribute.
 
 **Example:**
 

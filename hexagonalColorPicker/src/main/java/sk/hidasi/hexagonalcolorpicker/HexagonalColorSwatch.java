@@ -24,7 +24,6 @@ import android.widget.ImageView;
 
 class HexagonalColorSwatch extends ImageView {
 
-    private HexagonalColorPicker parent;
     final public PointF mPosition;
     final public int mColor;
     final public int mAnimDelay;

@@ -42,8 +42,8 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
 	private static final int DEFAULT_PALETTE_RADIUS = 3;
 
 	private HexagonalColorSwatch[] mSwatches;
-	private ImageView mChecker;
-	private GradientDrawable mShadowDrawable;
+	private final ImageView mChecker;
+	private final GradientDrawable mShadowDrawable;
 	private PointF mRenderOffset;
 	private PointF mRenderSize;
 	private int mPaletteRadius;
@@ -249,7 +249,6 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
         return true;
     }
 
-    @Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
 		final float strokePadding = Math.min(w, h) * 0.025f;
