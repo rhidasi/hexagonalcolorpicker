@@ -42,8 +42,8 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
 	private static final int DEFAULT_PALETTE_RADIUS = 3;
 
 	private HexagonalColorSwatch[] mSwatches;
-	private final ImageView mChecker;
-	private final GradientDrawable mShadowDrawable;
+	private ImageView mChecker;
+	private GradientDrawable mShadowDrawable;
 	private PointF mRenderOffset;
 	private PointF mRenderSize;
 	private int mPaletteRadius;
@@ -59,15 +59,21 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
 	}
 
     public HexagonalColorPicker(Context context) {
-		this(context, null, 0);
+		super(context);
+		init(context, null, 0);
 	}
 
 	public HexagonalColorPicker(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+		super(context, attrs);
+		init(context, attrs, 0);
 	}
 
 	public HexagonalColorPicker(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+		init(context, attrs, defStyleAttr);
+	}
+
+	private void init(Context context, AttributeSet attrs, int defStyleAttr) {
 
 		final TypedArray a = getContext().getTheme().obtainStyledAttributes(
 			attrs, R.styleable.HexagonalColorPicker, defStyleAttr, defStyleAttr);
