@@ -22,6 +22,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
+/**
+ * Hexagonal color picker dialog.
+ */
 public class HexagonalColorPickerDialog extends Dialog implements OnColorSelectedListener {
 
 	private static final String KEY_SELECTED_COLOR = "selected_color";
@@ -36,6 +39,15 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 	private int mSelectedColor;
 	private int mShadowColor;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param context       	Context
+	 * @param titleResId    	Resource id of the dialog title
+	 * @param radius        	Palette radius
+	 * @param selectedColor 	Selected color
+	 * @param listener      	Color change listener
+	 */
 	public HexagonalColorPickerDialog(Context context, final int titleResId, final int radius,
 								final int selectedColor, final OnColorSelectedListener listener) {
 		super(context);
@@ -45,7 +57,12 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 		mListener = listener;
 		mShadowColor = Color.GRAY;
 	}
-	
+
+	/**
+	 * Sets shadow color of swatches.
+	 *
+	 * @param shadowColor   New shadow color
+	 */
 	public void setShadowColor(final int shadowColor) {
 		mShadowColor = shadowColor;
 	}
@@ -79,6 +96,11 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 		dismiss();
 	}
 
+	/**
+	 * Gets selected color.
+	 *
+	 * @return Selected color
+	 */
 	public int getSelectedColor() {
 		return mSelectedColor;
 	}
@@ -93,5 +115,4 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 		outState.putInt(KEY_SHADOW_COLOR, mShadowColor);
 		return outState;
 	}
-
 }

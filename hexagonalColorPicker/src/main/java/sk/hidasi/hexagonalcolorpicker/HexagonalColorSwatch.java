@@ -22,35 +22,64 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.widget.ImageView;
 
+/**
+ * Color swatch with oval shape and solid color.
+ */
 class HexagonalColorSwatch extends ImageView {
 
-    final public PointF mPosition;
+    /**
+     * Color of the swatch.
+     */
     final public int mColor;
+    /**
+     * Position of the swatch (in relative coordinates from -1.0 to 1.0)
+     */
+    final public PointF mPosition;
+    /**
+     * Animation delay of the swatch (in ms).
+     */
     final public int mAnimDelay;
-    final private int mStrokeColor;
-    final private GradientDrawable mDrawable;
 
-    public HexagonalColorSwatch(final Context context, final float positionX, final float positionY, final int color, final int animDelay, final Drawable background) {
+    /**
+     * Instantiates a new color swatch.
+     *
+     * @param context    context
+     * @param position   position of the swatch
+     * @param color      color of the swatch
+     * @param animDelay  animation delay
+     * @param background background drawable (can be null)
+     */
+    public HexagonalColorSwatch(final Context context, final int color, final PointF position, final int animDelay, final Drawable background) {
         super(context);
 
-        mPosition = new PointF(positionX, positionY);
         mColor = color;
-        mStrokeColor = HexagonalColorPicker.getStrokeColor(mColor);
+        mPosition = position;
         mAnimDelay = animDelay;
 
-        mDrawable = new GradientDrawable();
-        mDrawable.setShape(GradientDrawable.OVAL);
-        mDrawable.setColor(mColor);
-        setImageDrawable(mDrawable);
+        final GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.OVAL);
+        drawable.setColor(mColor);
+        setImageDrawable(drawable);
         if (background != null) {
             setBackgroundCorrect(background);
         }
     }
 
+    /**
+     * Update stroke width.
+     *
+     * @param strokeWidth the new stroke width
+     */
     public void updateStrokeWidth(final int strokeWidth) {
-        mDrawable.setStroke(strokeWidth, mStrokeColor);
+        final GradientDrawable drawable = (GradientDrawable) getDrawable();
+        drawable.setStroke(strokeWidth, HexagonalColorPicker.calculateStrokeColor(mColor));
     }
 
+    /**
+     * Sets the background drawable. Uses the correct API according to API level.
+     *
+     * @param drawable  the new background drawable
+     */
     @SuppressWarnings("deprecation")
     private void setBackgroundCorrect(final Drawable drawable) {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {

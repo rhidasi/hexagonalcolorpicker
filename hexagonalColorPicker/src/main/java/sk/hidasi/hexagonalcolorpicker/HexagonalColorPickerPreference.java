@@ -28,29 +28,48 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+/**
+ * Hexagonal color picker preference.
+ */
 public class HexagonalColorPickerPreference extends Preference implements OnColorSelectedListener {
 
+	// Default palette radius (if not specified).
 	private static final int DEFAULT_PALETTE_RADIUS = 3;
 
 	private int mPaletteRadius;
 	private int mShadowColor;
 	private int mValue;
 
+	/**
+	 * Constructor.
+	 */
 	public HexagonalColorPickerPreference(Context context) {
 		super(context);
 		initAttrs(null, 0);
 	}
 
+	/**
+	 * Constructor.
+	 */
 	public HexagonalColorPickerPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initAttrs(attrs, 0);
 	}
 
+	/**
+	 * Constructor.
+	 */
 	public HexagonalColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initAttrs(attrs, defStyle);
 	}
 
+	/**
+	 * Initialize attributes.
+	 *
+	 * @param attrs         Attribute Set
+	 * @param defStyle		Default style
+	 */
 	private void initAttrs(AttributeSet attrs, int defStyle) {
 
 		final TypedArray a = getContext().getTheme().obtainStyledAttributes(
@@ -94,10 +113,21 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 		onColorSelected(restoreValue ? getPersistedInt(0) : (Integer) defaultValue);
 	}
 
+	/**
+	 * Get preference color value.
+	 *
+	 * @return color value
+	 */
 	public int getValue() {
 		return mValue;
 	}
 
+	/**
+	 * Creates a color preview and adds this view to widget frame layout.
+	 *
+	 * @param view		Preference view
+	 * @param color		Selected color value
+	 */
 	private void setPreviewImage(final View view, final int color) {
 
 		if (view == null) return;
@@ -123,10 +153,16 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
 		final GradientDrawable colorChoiceDrawable = new GradientDrawable();
 		colorChoiceDrawable.setShape(GradientDrawable.OVAL);
 		colorChoiceDrawable.setColor(color);
-		colorChoiceDrawable.setStroke(dipToPixels(1), HexagonalColorPicker.getStrokeColor(color));
+		colorChoiceDrawable.setStroke(dipToPixels(1), HexagonalColorPicker.calculateStrokeColor(color));
 		iView.setImageDrawable(colorChoiceDrawable);
 	}
 
+	/**
+	 * Converts 'dip' to pixels.
+	 *
+	 * @param dip	size in 'dip'
+	 * @return size in pixels
+	 */
 	private int dipToPixels(final float dip) {
 		return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getContext().getResources().getDisplayMetrics());
 	}
