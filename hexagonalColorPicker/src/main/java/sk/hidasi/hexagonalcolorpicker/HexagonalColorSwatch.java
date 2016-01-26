@@ -78,7 +78,7 @@ class HexagonalColorSwatch extends ImageView {
     /**
      * Sets the background drawable. Uses the correct API according to API level.
      *
-     * @param drawable  the new background drawable
+     * @param drawable the new background drawable
      */
     @SuppressWarnings("deprecation")
     private void setBackgroundCorrect(final Drawable drawable) {

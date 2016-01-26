@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center" >
+    android:gravity="center">
 
     <sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker
         android:id="@+id/color_picker"
         android:layout_width="wrap_content"
         android:layout_height="320dp"
-	    android:paddingLeft="6dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="6dp"
         android:paddingRight="6dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"/>
+        android:paddingTop="16dp" />
 
 </FrameLayout>

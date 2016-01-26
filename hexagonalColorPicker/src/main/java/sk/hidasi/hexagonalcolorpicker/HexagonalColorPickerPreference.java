@@ -17,6 +17,7 @@
 package sk.hidasi.hexagonalcolorpicker;
 
 import sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker.OnColorSelectedListener;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -33,137 +34,137 @@ import android.widget.LinearLayout;
  */
 public class HexagonalColorPickerPreference extends Preference implements OnColorSelectedListener {
 
-	// Default palette radius (if not specified).
-	private static final int DEFAULT_PALETTE_RADIUS = 3;
+    // Default palette radius (if not specified).
+    private static final int DEFAULT_PALETTE_RADIUS = 3;
 
-	private int mPaletteRadius;
-	private int mShadowColor;
-	private int mValue;
+    private int mPaletteRadius;
+    private int mShadowColor;
+    private int mValue;
 
-	/**
-	 * Constructor.
-	 */
-	public HexagonalColorPickerPreference(Context context) {
-		super(context);
-		initAttrs(null, 0);
-	}
+    /**
+     * Constructor.
+     */
+    public HexagonalColorPickerPreference(Context context) {
+        super(context);
+        initAttrs(null, 0);
+    }
 
-	/**
-	 * Constructor.
-	 */
-	public HexagonalColorPickerPreference(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initAttrs(attrs, 0);
-	}
+    /**
+     * Constructor.
+     */
+    public HexagonalColorPickerPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initAttrs(attrs, 0);
+    }
 
-	/**
-	 * Constructor.
-	 */
-	public HexagonalColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		initAttrs(attrs, defStyle);
-	}
+    /**
+     * Constructor.
+     */
+    public HexagonalColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        initAttrs(attrs, defStyle);
+    }
 
-	/**
-	 * Initialize attributes.
-	 *
-	 * @param attrs         Attribute Set
-	 * @param defStyle		Default style
-	 */
-	private void initAttrs(AttributeSet attrs, int defStyle) {
+    /**
+     * Initialize attributes.
+     *
+     * @param attrs    Attribute Set
+     * @param defStyle Default style
+     */
+    private void initAttrs(AttributeSet attrs, int defStyle) {
 
-		final TypedArray a = getContext().getTheme().obtainStyledAttributes(
-				attrs, R.styleable.HexagonalColorPicker, defStyle, defStyle);
+        final TypedArray a = getContext().getTheme().obtainStyledAttributes(
+                attrs, R.styleable.HexagonalColorPicker, defStyle, defStyle);
 
-		mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
-		mShadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.GRAY);
-		a.recycle();
-	}
+        mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
+        mShadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.GRAY);
+        a.recycle();
+    }
 
-	@Override
-	protected void onBindView(View view) {
-		super.onBindView(view);
-		setPreviewImage(view, mValue);
-	}
+    @Override
+    protected void onBindView(View view) {
+        super.onBindView(view);
+        setPreviewImage(view, mValue);
+    }
 
-	@Override
-	public void onColorSelected(final int color) {
-		if (callChangeListener(color)) {
-			mValue = color;
-			persistInt(color);
-			notifyChanged();
-		}
-	}
+    @Override
+    public void onColorSelected(final int color) {
+        if (callChangeListener(color)) {
+            mValue = color;
+            persistInt(color);
+            notifyChanged();
+        }
+    }
 
-	@Override
-	protected void onClick() {
-		super.onClick();
-		final HexagonalColorPickerDialog dialog = new HexagonalColorPickerDialog(getContext(), R.string.color_picker_default_title, mPaletteRadius, mValue, this);
-		dialog.setShadowColor(mShadowColor);
-		dialog.show();
-	}
+    @Override
+    protected void onClick() {
+        super.onClick();
+        final HexagonalColorPickerDialog dialog = new HexagonalColorPickerDialog(getContext(), R.string.color_picker_default_title, mPaletteRadius, mValue, this);
+        dialog.setShadowColor(mShadowColor);
+        dialog.show();
+    }
 
-	@Override
-	protected Object onGetDefaultValue(TypedArray a, int index) {
-		return a.getInt(index, 0);
-	}
+    @Override
+    protected Object onGetDefaultValue(TypedArray a, int index) {
+        return a.getInt(index, 0);
+    }
 
-	@Override
-	protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-		onColorSelected(restoreValue ? getPersistedInt(0) : (Integer) defaultValue);
-	}
+    @Override
+    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+        onColorSelected(restoreValue ? getPersistedInt(0) : (Integer) defaultValue);
+    }
 
-	/**
-	 * Get preference color value.
-	 *
-	 * @return color value
-	 */
-	public int getValue() {
-		return mValue;
-	}
+    /**
+     * Get preference color value.
+     *
+     * @return color value
+     */
+    public int getValue() {
+        return mValue;
+    }
 
-	/**
-	 * Creates a color preview and adds this view to widget frame layout.
-	 *
-	 * @param view		Preference view
-	 * @param color		Selected color value
-	 */
-	private void setPreviewImage(final View view, final int color) {
+    /**
+     * Creates a color preview and adds this view to widget frame layout.
+     *
+     * @param view  Preference view
+     * @param color Selected color value
+     */
+    private void setPreviewImage(final View view, final int color) {
 
-		if (view == null) return;
-		final LinearLayout widgetFrameView = ((LinearLayout)view.findViewById(android.R.id.widget_frame));
-		if (widgetFrameView == null) return;
-		widgetFrameView.setVisibility(View.VISIBLE);
-		widgetFrameView.setPadding(
-				widgetFrameView.getPaddingLeft(),
-				widgetFrameView.getPaddingTop(),
-				dipToPixels(7),
-				widgetFrameView.getPaddingBottom()
-				);
-		// remove already create preview image
-		final int count = widgetFrameView.getChildCount();
-		if (count > 0) {
-			widgetFrameView.removeViews(0, count);
-		}
-		final ImageView iView = new ImageView(getContext());
-		widgetFrameView.addView(iView);
-		widgetFrameView.setMinimumWidth(0);
-		final int size = dipToPixels(40);
-		iView.setLayoutParams(new LinearLayout.LayoutParams(size, size));
-		final GradientDrawable colorChoiceDrawable = new GradientDrawable();
-		colorChoiceDrawable.setShape(GradientDrawable.OVAL);
-		colorChoiceDrawable.setColor(color);
-		colorChoiceDrawable.setStroke(dipToPixels(1), HexagonalColorPicker.calculateStrokeColor(color));
-		iView.setImageDrawable(colorChoiceDrawable);
-	}
+        if (view == null) return;
+        final LinearLayout widgetFrameView = ((LinearLayout) view.findViewById(android.R.id.widget_frame));
+        if (widgetFrameView == null) return;
+        widgetFrameView.setVisibility(View.VISIBLE);
+        widgetFrameView.setPadding(
+                widgetFrameView.getPaddingLeft(),
+                widgetFrameView.getPaddingTop(),
+                dipToPixels(7),
+                widgetFrameView.getPaddingBottom()
+        );
+        // remove already create preview image
+        final int count = widgetFrameView.getChildCount();
+        if (count > 0) {
+            widgetFrameView.removeViews(0, count);
+        }
+        final ImageView iView = new ImageView(getContext());
+        widgetFrameView.addView(iView);
+        widgetFrameView.setMinimumWidth(0);
+        final int size = dipToPixels(40);
+        iView.setLayoutParams(new LinearLayout.LayoutParams(size, size));
+        final GradientDrawable colorChoiceDrawable = new GradientDrawable();
+        colorChoiceDrawable.setShape(GradientDrawable.OVAL);
+        colorChoiceDrawable.setColor(color);
+        colorChoiceDrawable.setStroke(dipToPixels(1), HexagonalColorPicker.calculateStrokeColor(color));
+        iView.setImageDrawable(colorChoiceDrawable);
+    }
 
-	/**
-	 * Converts 'dip' to pixels.
-	 *
-	 * @param dip	size in 'dip'
-	 * @return size in pixels
-	 */
-	private int dipToPixels(final float dip) {
-		return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getContext().getResources().getDisplayMetrics());
-	}
+    /**
+     * Converts 'dip' to pixels.
+     *
+     * @param dip size in 'dip'
+     * @return size in pixels
+     */
+    private int dipToPixels(final float dip) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getContext().getResources().getDisplayMetrics());
+    }
 }
