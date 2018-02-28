@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 26
+    buildToolsVersion project.myBuildToolsVersion
 
     defaultConfig {
         applicationId "sk.hidasi.hexagonalcolorpickerexample"
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 26
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }

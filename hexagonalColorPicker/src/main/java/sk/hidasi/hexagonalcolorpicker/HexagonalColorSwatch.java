@@ -16,10 +16,12 @@
 
 package sk.hidasi.hexagonalcolorpicker;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.widget.ImageView;
 
 /**
@@ -80,7 +82,8 @@ class HexagonalColorSwatch extends ImageView {
      *
      * @param drawable the new background drawable
      */
-    @SuppressWarnings("deprecation")
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+	@SuppressWarnings("deprecation")
     private void setBackgroundCorrect(final Drawable drawable) {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
             setBackgroundDrawable(drawable);
