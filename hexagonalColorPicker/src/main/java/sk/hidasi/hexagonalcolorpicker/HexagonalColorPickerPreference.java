@@ -132,7 +132,7 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
     private void setPreviewImage(final View view, final int color) {
 
         if (view == null) return;
-        final LinearLayout widgetFrameView = ((LinearLayout) view.findViewById(android.R.id.widget_frame));
+        final LinearLayout widgetFrameView = view.findViewById(android.R.id.widget_frame);
         if (widgetFrameView == null) return;
         widgetFrameView.setVisibility(View.VISIBLE);
         widgetFrameView.setPadding(

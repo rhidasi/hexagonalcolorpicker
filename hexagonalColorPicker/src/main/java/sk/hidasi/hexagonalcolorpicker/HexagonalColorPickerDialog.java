@@ -81,7 +81,7 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
 
         setContentView(R.layout.color_picker_dialog);
         setTitle(mTitleResId);
-        HexagonalColorPicker palette = (HexagonalColorPicker) findViewById(R.id.color_picker);
+        HexagonalColorPicker palette = findViewById(R.id.color_picker);
         palette.setAttrs(mPaletteRadius, mSelectedColor, this);
         palette.setShadowColor(mShadowColor);
     }

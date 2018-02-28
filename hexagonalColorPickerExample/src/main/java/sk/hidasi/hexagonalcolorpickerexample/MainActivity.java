@@ -40,12 +40,12 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SeekBar seekPaletteRadius = (SeekBar) findViewById(R.id.seekPaletteRadius);
-        EditText editPaletteRadius = (EditText) findViewById(R.id.editPaletteRadius);
+        SeekBar seekPaletteRadius = findViewById(R.id.seekPaletteRadius);
+        EditText editPaletteRadius = findViewById(R.id.editPaletteRadius);
 
         bindControls(seekPaletteRadius, editPaletteRadius, PALETTE_RADIUS - SEEK_MINIMUM);
 
-        HexagonalColorPicker colorPicker = (HexagonalColorPicker) findViewById(R.id.hexagonalColorPicker);
+        HexagonalColorPicker colorPicker = findViewById(R.id.hexagonalColorPicker);
         colorPicker.setAttrs(PALETTE_RADIUS, Color.WHITE, this);
     }
 
@@ -92,21 +92,21 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 
     public void onUpdateClick(View v) {
 
-        SeekBar seekPaletteRadius = (SeekBar) findViewById(R.id.seekPaletteRadius);
+        SeekBar seekPaletteRadius = findViewById(R.id.seekPaletteRadius);
 
         final int paletteRadius = SEEK_MINIMUM + seekPaletteRadius.getProgress();
 
-        HexagonalColorPicker colorPicker = (HexagonalColorPicker) findViewById(R.id.hexagonalColorPicker);
+        HexagonalColorPicker colorPicker = findViewById(R.id.hexagonalColorPicker);
         colorPicker.setAttrs(paletteRadius, Color.WHITE, this);
 
-        TextView textView = (TextView) findViewById(R.id.hello);
+        TextView textView = findViewById(R.id.hello);
         textView.setTextColor(Color.BLACK);
     }
 
     @Override
     public void onColorSelected(int color) {
 
-        TextView textView = (TextView) findViewById(R.id.hello);
+        TextView textView = findViewById(R.id.hello);
         textView.setTextColor(color);
     }
 }
