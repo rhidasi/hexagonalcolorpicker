@@ -1,2 +1,2 @@
-include ':hexagonalColorPicker'
-include ':hexagonalColorPickerExample'
+include ':hexagonal-color-picker'
+include ':hexagonal-color-picker-example'

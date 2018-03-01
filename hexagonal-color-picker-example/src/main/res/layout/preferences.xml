@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hidasi="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/settings">
+
+    <PreferenceCategory android:title="@string/dummy_category">
+
+        <CheckBoxPreference
+            android:key="dummy_checkbox"
+            android:summary="@string/dummy_checkbox_summary"
+            android:title="@string/dummy_checkbox" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/colors">
+
+        <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
+            android:defaultValue="@color/blue"
+            android:key="color_1"
+            android:summary="@string/tap_to_change_color"
+            android:title="@string/color1"
+            hidasi:paletteRadius="2"
+            hidasi:shadowColor="@color/shadow" />
+
+        <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
+            android:defaultValue="@color/red"
+            android:key="color_2"
+            android:summary="@string/tap_to_change_color"
+            android:title="@string/color2"
+            hidasi:paletteRadius="3"
+            hidasi:shadowColor="@color/shadow" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

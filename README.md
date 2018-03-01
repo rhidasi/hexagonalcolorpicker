@@ -7,7 +7,14 @@ The number of color swatches can be configured (parameter `"paletteRadius"`).
 
 Can be used as custom View, Dialog, or Preference.
 
-`android:minSdkVersion=8`
+Setup
+-----
+Inside the ```app/build.gradle``` file add the following dependencies:
+```
+dependencies {
+    compile 'sk.hidasi:hexagonal-color-picker:1.0.0'
+}
+```
 
 View (activity)
 ---------------

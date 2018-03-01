@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'hexagonal-color-picker'
+
+    publishedGroupId = 'sk.hidasi'
+    libraryName = 'HexagonalColorPicker'
+    artifact = 'hexagonal-color-picker'
+
+    libraryDescription = 'A android color picker.'
+
+    siteUrl = 'https://github.com/rhidasi/hexagonalcolorpicker'
+    gitUrl = 'https://github.com/rhidasi/hexagonalcolorpicker.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'rhidasi'
+    developerName = 'Robert Hidasi'
+    developerEmail = 'robert.hidasi@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion project.myBuildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 26
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+//Place it at the end of the file
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
