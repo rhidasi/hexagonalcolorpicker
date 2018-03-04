@@ -16,6 +16,13 @@ dependencies {
 }
 ```
 
+The library is hosted on JCenter:
+```
+repositories {
+    jcenter()
+}
+```
+
 View (activity)
 ---------------
 

@@ -19,18 +19,17 @@ package sk.hidasi.hexagonalcolorpickerexample;
 import sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker;
 import sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker.OnColorSelectedListener;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements OnColorSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnColorSelectedListener {
 
     private static final int PALETTE_RADIUS = 3;
     private static final int SEEK_MINIMUM = 1;
@@ -41,7 +40,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
         setContentView(R.layout.activity_main);
 
         SeekBar seekPaletteRadius = findViewById(R.id.seekPaletteRadius);
-        EditText editPaletteRadius = findViewById(R.id.editPaletteRadius);
+        TextView editPaletteRadius = findViewById(R.id.editPaletteRadius);
 
         bindControls(seekPaletteRadius, editPaletteRadius, PALETTE_RADIUS - SEEK_MINIMUM);
 
@@ -49,7 +48,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
         colorPicker.setAttrs(PALETTE_RADIUS, Color.WHITE, this);
     }
 
-    private void bindControls(final SeekBar seek, final EditText edit, final int initValue) {
+    private void bindControls(final SeekBar seek, final TextView text, final int initValue) {
 
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -63,7 +62,7 @@ public class MainActivity extends Activity implements OnColorSelectedListener {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                edit.setText(Integer.toString(progress + SEEK_MINIMUM));
+                text.setText(Integer.toString(progress + SEEK_MINIMUM));
             }
         });
 

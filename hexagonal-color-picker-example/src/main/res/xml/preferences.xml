@@ -7,10 +7,10 @@
 
     <PreferenceCategory android:title="@string/dummy_category">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="dummy_checkbox"
-            android:summary="@string/dummy_checkbox_summary"
-            android:title="@string/dummy_checkbox" />
+            android:summary="@string/dummy_preference_summary"
+            android:title="@string/dummy_preference" />
 
     </PreferenceCategory>
 

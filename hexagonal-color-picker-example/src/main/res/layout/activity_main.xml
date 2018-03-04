@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/activity_margin"
         android:text="@string/tap_to_change"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -27,40 +28,42 @@
         hidasi:paletteRadius="3"
         hidasi:shadowColor="@color/shadow" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/palette_radius"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/activity_margin"
         android:orientation="horizontal">
 
-        <SeekBar
-            android:id="@+id/seekPaletteRadius"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:max="4" />
+            android:text="@string/palette_radius"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <EditText
+        <TextView
             android:id="@+id/editPaletteRadius"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:ems="3"
-            android:enabled="false"
-            android:focusable="false"
-            android:inputType="numberDecimal" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="right"
+            android:ems="3"/>
 
     </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekPaletteRadius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
+        android:max="4" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
         android:onClick="onUpdateClick"
         android:text="@string/update">
 
