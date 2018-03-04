@@ -61,7 +61,7 @@ The usage of Dialog class is really straightforward.
 
 **Screenshot:**
 
-![Screen 4][screen4]
+![Screen 2][screen2]
 
 Preference
 ----------
@@ -82,7 +82,7 @@ Color Picker can be used also on Preference Screen. Usage is the same as for any
 
 **Screenshot:**
 
-![Screen 2][screen2] ![Screen 3][screen3]
+![Screen 3][screen3] ![Screen 4][screen4]
 
 HexagonalColorPickerExample
 ---------------------------
