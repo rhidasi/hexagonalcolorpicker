@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".Preferences"
+            android:name=".PreferencesActivity"
             android:label="@string/settings"
             android:exported="false">
             <meta-data

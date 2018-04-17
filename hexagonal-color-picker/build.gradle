@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/rhidasi/hexagonalcolorpicker'
     gitUrl = 'https://github.com/rhidasi/hexagonalcolorpicker.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.1.0'
 
     developerId = 'rhidasi'
     developerName = 'Robert Hidasi'
@@ -25,12 +25,12 @@ ext {
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion project.myBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 26
+        minSdkVersion 14
+        targetSdkVersion 27
     }
 
     buildTypes {
@@ -39,6 +39,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+}
+
+dependencies {
+    implementation 'com.android.support:preference-v7:27.1.1'
 }
 
 //Place it at the end of the file

@@ -18,14 +18,13 @@ package sk.hidasi.hexagonalcolorpickerexample;
 
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
 
-public class Preferences extends PreferenceActivity {
+public class PreferencesFragment extends PreferenceFragmentCompat {
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String s) {
         addPreferencesFromResource(R.xml.preferences);
     }
 }

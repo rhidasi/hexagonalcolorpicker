@@ -22,12 +22,12 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.widget.ImageView;
+import android.support.v7.widget.AppCompatImageView;
 
 /**
  * Color swatch with oval shape and solid color.
  */
-class HexagonalColorSwatch extends ImageView {
+class HexagonalColorSwatch extends AppCompatImageView {
 
     /**
      * Color of the swatch.

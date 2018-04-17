@@ -22,7 +22,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -82,9 +83,9 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
-        setPreviewImage(view, mValue);
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        setPreviewImage(holder, mValue);
     }
 
     @Override
@@ -126,13 +127,13 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
     /**
      * Creates a color preview and adds this view to widget frame layout.
      *
-     * @param view  Preference view
+     * @param view  Preference view holder
      * @param color Selected color value
      */
-    private void setPreviewImage(final View view, final int color) {
+    private void setPreviewImage(final PreferenceViewHolder view, final int color) {
 
         if (view == null) return;
-        final LinearLayout widgetFrameView = view.findViewById(android.R.id.widget_frame);
+        final LinearLayout widgetFrameView = (LinearLayout)view.findViewById(android.R.id.widget_frame);
         if (widgetFrameView == null) return;
         widgetFrameView.setVisibility(View.VISIBLE);
         widgetFrameView.setPadding(

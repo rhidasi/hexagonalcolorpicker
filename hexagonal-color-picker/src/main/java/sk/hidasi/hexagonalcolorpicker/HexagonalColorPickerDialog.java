@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 /**
  * Hexagonal color picker dialog.
@@ -106,6 +107,7 @@ public class HexagonalColorPickerDialog extends Dialog implements OnColorSelecte
         return mSelectedColor;
     }
 
+    @NonNull
     @Override
     public Bundle onSaveInstanceState() {
         final Bundle outState = new Bundle();

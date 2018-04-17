@@ -21,7 +21,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -271,9 +270,6 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
      * @return Animation object or null
      */
     private Animation createSwatchAnimation(final float swatchRadius, final int delay) {
-        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            return null;
-        }
         ScaleAnimation scaleAnim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, swatchRadius, swatchRadius);
         scaleAnim.setDuration(ANIM_TIME_SWATCH);
         scaleAnim.setStartOffset(delay);
