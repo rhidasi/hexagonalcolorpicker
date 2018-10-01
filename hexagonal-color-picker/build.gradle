@@ -25,12 +25,11 @@ ext {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion project.myBuildToolsVersion
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 28
     }
 
     buildTypes {
@@ -42,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:preference-v7:27.1.1'
+    implementation 'com.android.support:preference-v7:28.0.0'
 }
 
 //Place it at the end of the file
