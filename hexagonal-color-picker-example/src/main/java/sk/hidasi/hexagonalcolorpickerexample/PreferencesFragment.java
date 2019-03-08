@@ -18,7 +18,7 @@ package sk.hidasi.hexagonalcolorpickerexample;
 
 
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceFragmentCompat;
 
 
 public class PreferencesFragment extends PreferenceFragmentCompat {

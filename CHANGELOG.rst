@@ -2,6 +2,9 @@
 HexagonalColorPicker Change Log
 ================================
 
+2019-03-08 1.2.0:
+AndroidX Support
+
 2018-04-17 1.1.0:
 Android Support Library Preference
 

@@ -12,7 +12,7 @@ Setup
 Inside the ```app/build.gradle``` file add the following dependencies:
 ```
 dependencies {
-    compile 'sk.hidasi:hexagonal-color-picker:1.0.0'
+    implementation 'sk.hidasi:hexagonal-color-picker:1.2.0'
 }
 ```
 

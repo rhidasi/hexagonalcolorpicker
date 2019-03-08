@@ -22,8 +22,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -111,8 +111,8 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
     }
 
     @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        onColorSelected(restoreValue ? getPersistedInt(0) : (Integer) defaultValue);
+    protected void onSetInitialValue(Object defaultValue) {
+        onColorSelected(defaultValue == null ? getPersistedInt(0) : (Integer) defaultValue);
     }
 
     /**
