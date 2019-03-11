@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PointF;
-import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -39,14 +38,14 @@ import android.widget.ImageView;
  */
 public class HexagonalColorPicker extends FrameLayout implements View.OnTouchListener {
 
+    // Default palette radius (if not specified).
+    public static final int DEFAULT_PALETTE_RADIUS = 3;
     // Aspect ratio of the view (4:3).
     private static final float VIEW_ASPECT_RATIO = (float) Math.sqrt(4.0 / 3.0);
     // Duration of the animation for the whole view (all swatches).
     private static final int ANIM_TIME_VIEW = 500;
     // Duration of the animation for a single swatch.
     private static final int ANIM_TIME_SWATCH = 200;
-    // Default palette radius (if not specified).
-    private static final int DEFAULT_PALETTE_RADIUS = 3;
 
     // Radius of the palette (0 => 1 swatch, 1 => 7 swatches, ...)
     private int mPaletteRadius;
@@ -58,8 +57,6 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
     private PointF mSwatchScale;
     // Check mark (selected color swatch)
     private ImageView mChecker;
-    // Swatch shadow
-    private GradientDrawable mShadowDrawable;
     // Animation interpolator
     private final Interpolator mInterpolator = new OvershootInterpolator();
     // Selected color listener
@@ -113,15 +110,10 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
                 attrs, R.styleable.HexagonalColorPicker, defStyleAttr, defStyleAttr);
 
         mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
-        final int shadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.GRAY);
         a.recycle();
 
         mChecker = new ImageView(getContext());
         mChecker.setImageResource(R.drawable.ic_colorpicker_swatch_selected);
-
-        mShadowDrawable = new GradientDrawable();
-        mShadowDrawable.setShape(GradientDrawable.OVAL);
-        mShadowDrawable.setColor(shadowColor);
 
         mSelectedColor = Color.TRANSPARENT;
         mListener = null;
@@ -160,7 +152,7 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
                 final PointF position = new PointF((float) x / (mPaletteRadius * 2 + 1), (float) y / (mPaletteRadius * 2 + 1));
                 final int color = calculateColor(x, y);
                 final int animDelay = (ANIM_TIME_VIEW - ANIM_TIME_SWATCH) * index++ / swatchCount;
-                HexagonalColorSwatch swatch = new HexagonalColorSwatch(getContext(), color, position, animDelay, mShadowDrawable);
+                HexagonalColorSwatch swatch = new HexagonalColorSwatch(getContext(), color, position, animDelay);
                 addView(swatch);
                 swatch.setOnTouchListener(this);
             }
@@ -173,15 +165,6 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
         addView(mChecker);
 
         updateSwatchesPosition();
-    }
-
-    /**
-     * Sets shadow color of swatches.
-     *
-     * @param shadowColor New shadow color
-     */
-    public void setShadowColor(final int shadowColor) {
-        mShadowDrawable.setColor(shadowColor);
     }
 
     /**

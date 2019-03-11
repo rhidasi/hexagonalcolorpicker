@@ -25,8 +25,7 @@
         android:layout_height="280dp"
         android:layout_gravity="center_horizontal"
         android:padding="2dp"
-        hidasi:paletteRadius="3"
-        hidasi:shadowColor="@color/shadow" />
+        hidasi:paletteRadius="3" />
 
     <LinearLayout
         android:layout_width="match_parent"

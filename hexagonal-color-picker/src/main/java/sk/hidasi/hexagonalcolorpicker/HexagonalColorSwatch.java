@@ -18,6 +18,7 @@ package sk.hidasi.hexagonalcolorpicker;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -41,6 +42,15 @@ class HexagonalColorSwatch extends AppCompatImageView {
      * Animation delay of the swatch (in ms).
      */
     final public int mAnimDelay;
+    /**
+     * Shadow drawable
+     */
+    private static GradientDrawable mShadowDrawable;
+    /**
+     * Shadow color
+     */
+    private static final int SHADOW_COLOR = Color.argb(64, 0, 0, 0);
+
 
     /**
      * Instantiates a new color swatch.
@@ -49,9 +59,8 @@ class HexagonalColorSwatch extends AppCompatImageView {
      * @param position   position of the swatch
      * @param color      color of the swatch
      * @param animDelay  animation delay
-     * @param background background drawable (can be null)
      */
-    public HexagonalColorSwatch(final Context context, final int color, final PointF position, final int animDelay, final Drawable background) {
+    public HexagonalColorSwatch(final Context context, final int color, final PointF position, final int animDelay) {
         super(context);
 
         mColor = color;
@@ -62,9 +71,13 @@ class HexagonalColorSwatch extends AppCompatImageView {
         drawable.setShape(GradientDrawable.OVAL);
         drawable.setColor(mColor);
         setImageDrawable(drawable);
-        if (background != null) {
-            setBackgroundCorrect(background);
+
+        if (mShadowDrawable == null) {
+            mShadowDrawable = new GradientDrawable();
+            mShadowDrawable.setShape(GradientDrawable.OVAL);
+            mShadowDrawable.setColor(SHADOW_COLOR);
         }
+        setBackgroundCompat(mShadowDrawable);
     }
 
     /**
@@ -83,8 +96,8 @@ class HexagonalColorSwatch extends AppCompatImageView {
      * @param drawable the new background drawable
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	@SuppressWarnings("deprecation")
-    private void setBackgroundCorrect(final Drawable drawable) {
+    @SuppressWarnings("deprecation")
+    private void setBackgroundCompat(final Drawable drawable) {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
             setBackgroundDrawable(drawable);
         } else {

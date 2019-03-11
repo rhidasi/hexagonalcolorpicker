@@ -17,20 +17,18 @@
     <PreferenceCategory android:title="@string/colors">
 
         <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
-            android:defaultValue="@color/blue"
             android:key="color_1"
-            android:summary="@string/tap_to_change_color"
+            android:defaultValue="@color/blue"
             android:title="@string/color1"
-            hidasi:paletteRadius="2"
-            hidasi:shadowColor="@color/shadow" />
+            android:summary="@string/tap_to_change_color"
+            hidasi:paletteRadius="2" />
 
         <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
-            android:defaultValue="@color/red"
             android:key="color_2"
-            android:summary="@string/tap_to_change_color"
+            android:defaultValue="@color/red"
             android:title="@string/color2"
-            hidasi:paletteRadius="3"
-            hidasi:shadowColor="@color/shadow" />
+            android:summary="@string/tap_to_change_color"
+            hidasi:paletteRadius="3" />
 
     </PreferenceCategory>
 

@@ -20,7 +20,6 @@ import sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker.OnColorSelectedListen
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -35,11 +34,7 @@ import android.widget.LinearLayout;
  */
 public class HexagonalColorPickerPreference extends Preference implements OnColorSelectedListener {
 
-    // Default palette radius (if not specified).
-    private static final int DEFAULT_PALETTE_RADIUS = 3;
-
     private int mPaletteRadius;
-    private int mShadowColor;
     private int mValue;
 
     /**
@@ -77,8 +72,7 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
         final TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 attrs, R.styleable.HexagonalColorPicker, defStyle, defStyle);
 
-        mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
-        mShadowColor = a.getColor(R.styleable.HexagonalColorPicker_shadowColor, Color.GRAY);
+        mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, HexagonalColorPicker.DEFAULT_PALETTE_RADIUS);
         a.recycle();
     }
 
@@ -101,7 +95,6 @@ public class HexagonalColorPickerPreference extends Preference implements OnColo
     protected void onClick() {
         super.onClick();
         final HexagonalColorPickerDialog dialog = new HexagonalColorPickerDialog(getContext(), R.string.color_picker_default_title, mPaletteRadius, mValue, this);
-        dialog.setShadowColor(mShadowColor);
         dialog.show();
     }
 
