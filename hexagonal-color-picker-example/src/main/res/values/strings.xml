@@ -15,5 +15,6 @@
     <string name="color1">Color 1</string>
     <string name="color2">Color 2</string>
     <string name="tap_to_change_color">Tap to change color</string>
+    <string name="switch_theme">Switch theme</string>
 
 </resources>

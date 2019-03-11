@@ -5,8 +5,14 @@
 
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         app:showAsAction="never"
         android:title="@string/settings" />
+
+    <item
+        android:id="@+id/action_switch_theme"
+        android:orderInCategory="2"
+        app:showAsAction="never"
+        android:title="@string/switch_theme" />
 
 </menu>

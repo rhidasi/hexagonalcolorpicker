@@ -16,6 +16,8 @@
 
 package sk.hidasi.hexagonalcolorpickerexample;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker;
 import sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker.OnColorSelectedListener;
 
@@ -31,21 +33,25 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements OnColorSelectedListener {
 
-    private static final int PALETTE_RADIUS = 3;
     private static final int SEEK_MINIMUM = 1;
+    private int paletteRadius = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState != null) {
+            paletteRadius = savedInstanceState.getInt("paletteRadius");
+        }
+
         SeekBar seekPaletteRadius = findViewById(R.id.seekPaletteRadius);
         TextView editPaletteRadius = findViewById(R.id.editPaletteRadius);
 
-        bindControls(seekPaletteRadius, editPaletteRadius, PALETTE_RADIUS - SEEK_MINIMUM);
+        bindControls(seekPaletteRadius, editPaletteRadius, paletteRadius - SEEK_MINIMUM);
 
         HexagonalColorPicker colorPicker = findViewById(R.id.hexagonalColorPicker);
-        colorPicker.setAttrs(PALETTE_RADIUS, Color.WHITE, this);
+        colorPicker.setAttrs(paletteRadius, Color.WHITE, this);
     }
 
     private void bindControls(final SeekBar seek, final TextView text, final int initValue) {
@@ -81,19 +87,28 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            startActivity(new Intent(this, PreferencesActivity.class));
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(this, PreferencesActivity.class));
+                return true;
+            case R.id.action_switch_theme:
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                recreate();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public void onUpdateClick(View v) {
 
         SeekBar seekPaletteRadius = findViewById(R.id.seekPaletteRadius);
 
-        final int paletteRadius = SEEK_MINIMUM + seekPaletteRadius.getProgress();
+        paletteRadius = SEEK_MINIMUM + seekPaletteRadius.getProgress();
 
         HexagonalColorPicker colorPicker = findViewById(R.id.hexagonalColorPicker);
         colorPicker.setAttrs(paletteRadius, Color.WHITE, this);
@@ -107,5 +122,11 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
 
         TextView textView = findViewById(R.id.hello);
         textView.setTextColor(color);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("paletteRadius", paletteRadius);
     }
 }
