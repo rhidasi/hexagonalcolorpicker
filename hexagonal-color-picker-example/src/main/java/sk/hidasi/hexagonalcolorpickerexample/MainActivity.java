@@ -113,15 +113,15 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         HexagonalColorPicker colorPicker = findViewById(R.id.hexagonalColorPicker);
         colorPicker.setAttrs(paletteRadius, Color.WHITE, this);
 
-        TextView textView = findViewById(R.id.hello);
-        textView.setTextColor(Color.BLACK);
+        TextView textView = findViewById(R.id.tapToChange);
+        textView.setBackgroundColor(Color.TRANSPARENT);
     }
 
     @Override
     public void onColorSelected(int color) {
 
-        TextView textView = findViewById(R.id.hello);
-        textView.setTextColor(color);
+        TextView textView = findViewById(R.id.tapToChange);
+        textView.setBackgroundColor(color);
     }
 
     @Override

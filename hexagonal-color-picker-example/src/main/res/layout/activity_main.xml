@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:hidasi="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,21 +11,20 @@
     tools:context="sk.hidasi.hexagonalcolorpickerexample.MainActivity">
 
     <TextView
-        android:id="@+id/hello"
+        android:id="@+id/tapToChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/activity_margin"
         android:text="@string/tap_to_change"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="20sp"/>
 
     <sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker
         android:id="@+id/hexagonalColorPicker"
         android:layout_width="wrap_content"
         android:layout_height="280dp"
         android:layout_gravity="center_horizontal"
-        android:padding="2dp"
-        hidasi:paletteRadius="3" />
+        android:padding="2dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,15 +37,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/palette_radius"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/palette_radius" />
 
         <TextView
             android:id="@+id/editPaletteRadius"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="right"
             android:ems="3"/>
 
