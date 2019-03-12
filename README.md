@@ -5,7 +5,12 @@ Simple color picker for Android with a hexagonal design.
 
 The number of color swatches can be configured (parameter `"paletteRadius"`).
 
-Can be used as custom View, Dialog, or Preference.
+Can be used as custom:
+- **View**
+- **AlertDialog** (androidx.appcompat.app.AlertDialog)
+- **Preference** (androidx.preference.Preference).
+
+<img src="images/hexa-color-picker.gif" alt="HexagonalColorPicker animation"/>
 
 Setup
 -----
@@ -23,8 +28,8 @@ repositories {
 }
 ```
 
-View (activity)
----------------
+View
+----
 
 Color Picker can be put in XML layout just like any other android view.
 
@@ -33,34 +38,35 @@ You can optionally define color change listener (see `HexagonalColorPicker#setLi
 **Example:**
 
 ```xml
-	<sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker
-		android:id="@+id/hexagonalColorPicker"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		app:paletteRadius="3"
-		android:padding="4dp" />
+    <sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker
+        android:id="@+id/hexagonalColorPicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:paletteRadius="3" />
 ```
 
-**Screenshot:**
+**Screenshots:**
 
-![Screen 1][screen1]
+<img src="images/screen1.png" alt="Screenshot 1" width="300"/>
+<img src="images/screen1d.png" alt="Screenshot 1 dark" width="300"/>
 
-Dialog
-------
+AlertDialog
+-----------
 
-The usage of Dialog class is really straightforward.
+The usage of AlertDialog class is really straightforward.
 
 **Example:**
 
 ```java
-	HexagonalColorPickerDialog dialog = new HexagonalColorPickerDialog(getContext(), R.string.color_picker_default_title, paletteRadius, initialColor, listener);
-	dialog.show();
+    HexagonalColorPickerDialog dialog = new HexagonalColorPickerDialog(getContext(), R.string.color_picker_default_title, paletteRadius, initialColor, listener);
+    dialog.show();
 ```
 
-**Screenshot:**
+**Screenshots:**
 
-![Screen 2][screen2]
+<img src="images/screen2.png" alt="Screenshot 2" width="300"/>
+<img src="images/screen2d.png" alt="Screenshot 2 dark" width="300"/>
 
 Preference
 ----------
@@ -70,17 +76,21 @@ Color Picker can be used also on Preference Screen. Usage is the same as for any
 **Example:**
 
 ```xml
-	<sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
-		android:key="key_color"
-		android:title="@string/color"
-		android:summary="@string/tap_to_change_color"
-		android:defaultValue="@color/red"
-		app:paletteRadius="3" />
+    <sk.hidasi.hexagonalcolorpicker.HexagonalColorPickerPreference
+        android:key="key_color"
+        android:title="@string/color"
+        android:summary="@string/tap_to_change_color"
+        android:defaultValue="@color/red"
+        app:paletteRadius="3" />
 ```
 
-**Screenshot:**
+**Screenshots:**
 
-![Screen 3][screen3] ![Screen 4][screen4]
+<img src="images/screen3.png" alt="Screenshot 3" width="300"/>
+<img src="images/screen4.png" alt="Screenshot 4" width="300"/>
+
+<img src="images/screen3d.png" alt="Screenshot 3 dark" width="300"/>
+<img src="images/screen4d.png" alt="Screenshot 4 dark" width="300"/>
 
 HexagonalColorPickerExample
 ---------------------------
@@ -95,8 +105,3 @@ License
 -------
 
 Code is licensed under the Apache License, Version 2.0.
-
-[screen1]: https://raw.githubusercontent.com/rhidasi/hexagonalcolorpicker/master/screen1.png
-[screen2]: https://raw.githubusercontent.com/rhidasi/hexagonalcolorpicker/master/screen2.png
-[screen3]: https://raw.githubusercontent.com/rhidasi/hexagonalcolorpicker/master/screen3.png
-[screen4]: https://raw.githubusercontent.com/rhidasi/hexagonalcolorpicker/master/screen4.png
