@@ -16,9 +16,9 @@
 
 package sk.hidasi.hexagonalcolorpicker;
 
+import androidx.appcompat.app.AlertDialog;
 import sk.hidasi.hexagonalcolorpicker.HexagonalColorPicker.OnColorSelectedListener;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -26,7 +26,7 @@ import androidx.annotation.NonNull;
 /**
  * Hexagonal color picker dialog.
  */
-public class HexagonalColorPickerDialog extends Dialog implements OnColorSelectedListener {
+public class HexagonalColorPickerDialog extends AlertDialog implements OnColorSelectedListener {
 
     private static final String KEY_SELECTED_COLOR = "selected_color";
     private static final String KEY_PALETTE_RADIUS = "palette_radius";
