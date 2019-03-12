@@ -18,7 +18,6 @@ package sk.hidasi.hexagonalcolorpicker;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -45,11 +44,6 @@ class HexagonalColorSwatch extends AppCompatImageView {
     /**
      * Shadow drawable
      */
-    private static GradientDrawable mShadowDrawable;
-    /**
-     * Shadow color
-     */
-    private static final int SHADOW_COLOR = Color.argb(64, 0, 0, 0);
 
 
     /**
@@ -60,7 +54,7 @@ class HexagonalColorSwatch extends AppCompatImageView {
      * @param color      color of the swatch
      * @param animDelay  animation delay
      */
-    public HexagonalColorSwatch(final Context context, final int color, final PointF position, final int animDelay) {
+    public HexagonalColorSwatch(final Context context, final int color, final PointF position, final int animDelay, final Drawable background) {
         super(context);
 
         mColor = color;
@@ -71,13 +65,7 @@ class HexagonalColorSwatch extends AppCompatImageView {
         drawable.setShape(GradientDrawable.OVAL);
         drawable.setColor(mColor);
         setImageDrawable(drawable);
-
-        if (mShadowDrawable == null) {
-            mShadowDrawable = new GradientDrawable();
-            mShadowDrawable.setShape(GradientDrawable.OVAL);
-            mShadowDrawable.setColor(SHADOW_COLOR);
-        }
-        setBackgroundCompat(mShadowDrawable);
+        setBackgroundCompat(background);
     }
 
     /**

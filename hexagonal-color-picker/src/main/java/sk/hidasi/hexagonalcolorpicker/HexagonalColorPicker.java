@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -46,6 +47,8 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
     private static final int ANIM_TIME_VIEW = 500;
     // Duration of the animation for a single swatch.
     private static final int ANIM_TIME_SWATCH = 200;
+    // Shadow color
+    private static final int SHADOW_COLOR = Color.argb(64, 0, 0, 0);
 
     // Radius of the palette (0 => 1 swatch, 1 => 7 swatches, ...)
     private int mPaletteRadius;
@@ -61,6 +64,9 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
     private final Interpolator mInterpolator = new OvershootInterpolator();
     // Selected color listener
     private OnColorSelectedListener mListener;
+    // Shadow color
+    private GradientDrawable mShadowDrawable;
+
 
     /**
      * The interface of selected color listener.
@@ -112,6 +118,10 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
         mPaletteRadius = a.getInteger(R.styleable.HexagonalColorPicker_paletteRadius, DEFAULT_PALETTE_RADIUS);
         a.recycle();
 
+        mShadowDrawable = new GradientDrawable();
+        mShadowDrawable.setShape(GradientDrawable.OVAL);
+        mShadowDrawable.setColor(SHADOW_COLOR);
+
         mChecker = new ImageView(getContext());
         mChecker.setImageResource(R.drawable.ic_colorpicker_swatch_selected);
 
@@ -152,7 +162,7 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
                 final PointF position = new PointF((float) x / (mPaletteRadius * 2 + 1), (float) y / (mPaletteRadius * 2 + 1));
                 final int color = calculateColor(x, y);
                 final int animDelay = (ANIM_TIME_VIEW - ANIM_TIME_SWATCH) * index++ / swatchCount;
-                HexagonalColorSwatch swatch = new HexagonalColorSwatch(getContext(), color, position, animDelay);
+                HexagonalColorSwatch swatch = new HexagonalColorSwatch(getContext(), color, position, animDelay, mShadowDrawable);
                 addView(swatch);
                 swatch.setOnTouchListener(this);
             }
