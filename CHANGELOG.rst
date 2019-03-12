@@ -2,6 +2,9 @@
 HexagonalColorPicker Change Log
 ================================
 
+2019-03-08 1.2.1:
+Removed shadow color attribute
+
 2019-03-08 1.2.0:
 AndroidX Support
 
