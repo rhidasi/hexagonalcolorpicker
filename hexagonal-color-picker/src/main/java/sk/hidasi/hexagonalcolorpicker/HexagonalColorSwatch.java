@@ -16,12 +16,10 @@
 
 package sk.hidasi.hexagonalcolorpicker;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
@@ -41,9 +39,6 @@ class HexagonalColorSwatch extends AppCompatImageView {
      * Animation delay of the swatch (in ms).
      */
     final public int mAnimDelay;
-    /**
-     * Shadow drawable
-     */
 
 
     /**
@@ -65,7 +60,7 @@ class HexagonalColorSwatch extends AppCompatImageView {
         drawable.setShape(GradientDrawable.OVAL);
         drawable.setColor(mColor);
         setImageDrawable(drawable);
-        setBackgroundCompat(background);
+        setBackground(background);
     }
 
     /**
@@ -77,20 +72,4 @@ class HexagonalColorSwatch extends AppCompatImageView {
         final GradientDrawable drawable = (GradientDrawable) getDrawable();
         drawable.setStroke(strokeWidth, HexagonalColorPicker.calculateStrokeColor(mColor));
     }
-
-    /**
-     * Sets the background drawable. Uses the correct API according to API level.
-     *
-     * @param drawable the new background drawable
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @SuppressWarnings("deprecation")
-    private void setBackgroundCompat(final Drawable drawable) {
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            setBackgroundDrawable(drawable);
-        } else {
-            setBackground(drawable);
-        }
-    }
-
 }

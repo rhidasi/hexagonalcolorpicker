@@ -361,7 +361,7 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
         return true;
     }
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldW, int oldH) {
 
         final float width = w - getPaddingLeft() - getPaddingRight();
         final float height = h - getPaddingTop() - getPaddingBottom();
