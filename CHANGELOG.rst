@@ -2,6 +2,9 @@
 HexagonalColorPicker Change Log
 ================================
 
+2019-03-24 1.2.2:
+Vector drawables (minSdkVersion 16)
+
 2019-03-08 1.2.1:
 Removed shadow color attribute
 

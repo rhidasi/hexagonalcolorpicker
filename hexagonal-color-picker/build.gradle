@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/rhidasi/hexagonalcolorpicker'
     gitUrl = 'https://github.com/rhidasi/hexagonalcolorpicker.git'
 
-    libraryVersion = '1.2.1'
+    libraryVersion = '1.2.2'
 
     developerId = 'rhidasi'
     developerName = 'Robert Hidasi'
@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.preference:preference:1.1.0-alpha03'
+    implementation 'androidx.preference:preference:1.1.0-alpha04'
 }
 
 //Place it at the end of the file

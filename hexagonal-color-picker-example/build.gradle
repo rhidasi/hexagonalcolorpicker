@@ -7,8 +7,8 @@ android {
         applicationId "sk.hidasi.hexagonalcolorpickerexample"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 3
-        versionName "2.0"
+        versionCode 5
+        versionName "1.2.2"
     }
 
     buildTypes {
@@ -22,8 +22,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
-    implementation 'androidx.preference:preference:1.1.0-alpha03'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
+    implementation 'androidx.preference:preference:1.1.0-alpha04'
     implementation 'com.google.android.material:material:1.1.0-alpha04'
 
     implementation project(':hexagonal-color-picker')
