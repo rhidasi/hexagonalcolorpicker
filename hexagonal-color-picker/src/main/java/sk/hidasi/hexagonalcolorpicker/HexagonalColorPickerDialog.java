@@ -69,7 +69,9 @@ public class HexagonalColorPickerDialog extends AlertDialog implements OnColorSe
         setContentView(R.layout.color_picker_dialog);
         setTitle(mTitleResId);
         HexagonalColorPicker palette = findViewById(R.id.color_picker);
-        palette.setAttrs(mPaletteRadius, mSelectedColor, this);
+        if (palette != null) {
+            palette.setAttrs(mPaletteRadius, mSelectedColor, this);
+        }
     }
 
     @Override

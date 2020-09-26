@@ -241,15 +241,11 @@ public class HexagonalColorPicker extends FrameLayout implements View.OnTouchLis
                 item.updateStrokeWidth(strokeWidth);
 
                 final Animation itemAnim = createSwatchAnimation(swatchRadius, item.mAnimDelay);
-                if (itemAnim != null) {
-                    item.startAnimation(itemAnim);
-                }
+                item.startAnimation(itemAnim);
 
                 if (item.mColor == mSelectedColor) {
                     updateCheckerPosition(item);
-                    if (itemAnim != null) {
-                        mChecker.startAnimation(itemAnim);
-                    }
+                    mChecker.startAnimation(itemAnim);
                 }
             }
         }
