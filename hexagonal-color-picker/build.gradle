@@ -25,11 +25,11 @@ ext {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 30
     }
 
     buildTypes {
@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.preference:preference:1.1.0-alpha04'
+    implementation 'androidx.preference:preference:1.1.1'
 }
 
 //Place it at the end of the file
